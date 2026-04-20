@@ -1,0 +1,250 @@
+/* 
+    services-1-start
+*/
+.st-services-1 {
+    &-area {
+        background-color: #0c0c0c;
+    }
+
+    &-vh {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &-wrap {
+        display: flex;
+        justify-content: space-between;
+        gap: 50px;
+    }
+
+    &-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &-middle {
+        max-width: 600px;
+        width: 100%;
+    }
+
+    &-right {
+        max-width: 540px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+        align-self: center;
+    }
+    
+
+    &-item {
+        &-prev {
+            &-img-wrap {
+                display: inline-block;
+
+                .bottom-line-1 {
+                    background-color: #414141;
+                    height: 2px;
+                    width: 72px;
+                }
+            }
+            &-img {
+                width: 72px;
+                height: 82px;
+                position: relative;
+                z-index: 1;
+                overflow: hidden;
+
+                &::after {
+                    content: "";
+                    width: 35px;
+                    height: 2px;
+                    background-color: var(--st-clr-pr-1);
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                }
+
+                &::before {
+                    content: "";
+                    height: 35px;
+                    width: 2px;
+                    background-color: var(--st-clr-pr-1);
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    z-index: 1;
+                }
+
+                &-single {
+                    position: absolute;
+                    inset: 0;
+                    border: 2px solid #414141;
+
+    
+                    &:not(:first-of-type) {
+                        transform: translateX(105%);
+                    }
+                }
+            }
+        }
+
+        &-main-img {
+            height: 480px;
+            position: relative;
+            z-index: 1;
+            max-width: 385px;
+            width: 100%;
+            overflow: hidden;
+            &-single {
+                position: absolute;
+                inset: 0;
+
+                &:not(:first-child) {
+                    transform: translateX(105%);
+                }
+            }
+        }
+
+        &-next-img {
+            position: relative;
+            z-index: 1;
+            height: 240px;
+            width: 215px;
+            margin-left: auto;
+            overflow: hidden;
+        }
+        
+
+
+        &-number {
+            position: relative;
+            z-index: 1;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            min-width: 200px;
+            overflow: hidden;
+
+            .number-single {
+                font-size: 120px;
+                line-height: 1;
+                position: absolute;
+
+                &:not(:first-child) {
+                    transform: translateY(100px);
+                }
+            }
+        }
+        
+
+        &-subtitle {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 50px 0;
+            border-top: 1px solid #292929;
+            border-bottom: 1px solid #292929;
+
+            .subtitle-elm {
+                font-size: 16px;
+                color: #fff;
+                padding-left: 24px;
+                position: relative;
+                z-index: 1;
+                opacity: .5;
+
+                &::after {
+                    content: "";
+                    width: 8px;
+                    height: 2px;
+                    background-color: #fff;
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    transition: .5s var(--st-cube-1);
+                }
+
+                &:is(.active) {
+                    opacity: 1;
+
+                    &::after {
+                        width: 14px;
+                        background-color: var(--st-clr-pr-1);
+                    }
+                }
+            }
+        }
+        
+        &-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            height: 340px;
+
+            &-box {
+                position: absolute;
+                transition: .3s var(--st-cube-1);
+                opacity: 0;
+
+                .border-elm {
+                    border-top: 1px solid #292929;
+                    border-bottom: 1px solid #292929;
+                    padding: 40px 0;
+                }
+
+                .title {
+                    font-size: 45px;
+                    letter-spacing: -0.05em;
+                    margin-bottom: 19px;
+                }
+
+                .disc {
+                    max-width: 456px;
+                    font-size: 20px;
+                }
+
+
+                .btn-elm {
+                    margin-left: 110px;
+                    margin-top: 54px;
+                }
+
+
+                &:is(.active) {
+                    opacity: 1;
+
+                    .title {
+                        animation: fadeInUp2 .5s backwards;
+                        animation-delay: .2s;
+                    }
+
+                    .disc {
+                        animation: fadeInUp2 .5s backwards;
+                        animation-delay: .3s;
+                    }
+
+                    .btn-elm {
+                        animation: fadeInUp2 .5s backwards;
+                        animation-delay: .4s;
+                    }
+                }
+            }
+        }
+        
+        
+        
+        
+    }
+    
+}
+/* 
+    services-1-end
+*/

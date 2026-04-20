@@ -1,0 +1,158 @@
+/* 
+    about-1-start
+*/
+
+.st-about-1 {
+    &-sec-title {
+        border-bottom: 1px solid rgb(190 190 190 / 12%);
+        padding-bottom: 35px;
+
+        .sec-disc {
+            margin-top: 29px;
+        }
+    }
+
+    &-wrap {
+        display: grid;
+        gap: 50px;
+        grid-template-columns: 0.27fr 0.29fr 0.44fr;
+
+        @media #{$xxxl,$xxl,$xl} {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        @media #{$lg} {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media #{$md,$xs} {
+            grid-template-columns: 1fr;
+        }
+    }
+
+
+    &-img {
+        height: 656px;
+
+        @media #{$xs} {
+            height: 456px;
+        }
+
+        @media #{$sm} {
+            height: 600px;
+        }
+    }
+
+
+    &-img-shape {
+        position: absolute;
+        top: -1px;
+        left: -54px;
+        z-index: 1;
+
+        @media #{$xs} {
+            height: 100%;
+            overflow: hidden;
+        }
+    }
+
+    &-features {
+        display: flex;
+        flex-direction: column;
+        gap: 19px;
+
+        li {
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+    }
+
+
+
+    &-card {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+
+        @media #{$lg} {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-start: 1;
+            grid-column-end: -1;
+        }
+
+        &-single {
+            border: 4px solid #252424;
+            padding: 27px 34px;
+            transition: .4s var(--st-cube-1);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+
+
+            @media #{$xxxl,$xxl,$xl,$lg,$md,$xs} {
+                padding: 27px 15px;
+            }
+
+            &::after {
+                content: "";
+                width: 150px;
+                height: 150px;
+                background-color: var(--st-clr-pr-1);
+                border-radius: 50%;
+                position: absolute;
+                bottom: -40px;
+                right: -40px;
+                filter: blur(30px);
+                opacity: 0;
+                transition: .4s var(--st-cube-1);
+            }
+
+            .title {
+                font-size: 36px;
+                margin-bottom: 20px;
+
+                @media #{$xxxl,$xxl,$xl,$lg,$md} {
+                    font-size: 26px;
+                }
+
+                @media #{$xs} {
+                    font-size: 22px;
+                }
+            }
+            
+
+            .dvr-line {
+                background-color: #d1d1d1;
+                width: 100%;
+                height: 1px;
+                opacity: 18%;
+                margin-bottom: 24px;
+            }
+
+            .disc {
+                max-width: 520px;
+            }
+
+            &:hover {
+                border-color: var(--st-clr-pr-1);
+
+                &::after {
+                    opacity: .6;
+                }
+            }
+        }
+    }
+    
+}
+
+
+
+
+/* 
+    about-1-end
+*/

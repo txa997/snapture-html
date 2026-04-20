@@ -1,0 +1,15 @@
+/* 
+    custom-container-start
+*/
+
+@media (min-width: 1800px) {
+    .container{
+        &.st-container-1 {
+            max-width: 1710px;
+        }
+    }
+}
+
+/* 
+    custom-container-end
+*/

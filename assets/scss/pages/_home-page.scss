@@ -1,0 +1,55 @@
+/* 
+    home-css-start
+*/
+
+.st-home-1 {
+    background-color: #000;
+}
+
+.xr-home-2 {
+    background-color: #000;
+
+    @media #{$over,$xxxl,$xxl} {
+        &::-webkit-scrollbar-thumb {
+            background: var(--xr-clr-pr-2);
+        }
+    }
+
+    .wa-cursor {
+        &::before {
+            background: var(--xr-clr-pr-2);
+        }
+    }
+}
+
+.xr-home-3 {
+    background-color: #ECECEC;
+
+    .wa-cursor {
+        &::before {
+            background: var(--xr-clr-gd-3);
+        }
+    }
+
+    @media #{$over,$xxxl,$xxl} {
+        &::-webkit-scrollbar-thumb {
+            background: var(--xr-clr-gd-3);
+        }
+    }
+}
+
+.xr-home-3-bg-clr {
+    background-color: #ECECEC;
+    position: relative;
+    z-index: 2;
+}
+
+.sk-home-2 {
+    background-color: var(--sk-clr-white-1);
+
+
+}
+
+/* 
+    home-css-end
+*/
