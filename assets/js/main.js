@@ -34,8 +34,6 @@ window.addEventListener('load', function(){
 })
 
 
-
-
 /* 
 	after-preloader-start
 */
@@ -363,10 +361,6 @@ function afterPreloader() {
 }
 
 
-
-
-
-
 /* 
 	after-page-load-start
 */
@@ -433,5 +427,34 @@ if ($('.st_p1_slider').length) {
 
 }
 		
+// expertise-1-img-cursor-follow
+if($(".st-expertise-1-item").length) {
+	const featureItems = document.querySelectorAll(".st-expertise-1-item");
+
+	featureItems.forEach((featureItem) => {
+		const flair = featureItem.querySelector(".cursor-follow");
+	
+		gsap.set(flair, { scale: 0, opacity: 0, xPercent: -50, yPercent: -80, rotate: 0, });
+	
+		featureItem.addEventListener("mouseenter", () => {
+			gsap.to(flair, { scale: 1, opacity: 1, duration: 0.4, rotate: 14, ease: "power3.out" });
+		});
+
+
+		featureItem.addEventListener("mousemove", (e) => {
+			const rect = featureItem.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const y = e.clientY - rect.top;
+			gsap.to(flair, { x, y, duration: 0.1 });
+		});
+	
+		featureItem.addEventListener("mouseleave", () => {
+			gsap.to(flair, { scale: 0, opacity: 0, rotate: 0, duration: 0.4, ease: "power3.in" });
+		});
+	});
+	
+}
+
+
 
 })(jQuery);

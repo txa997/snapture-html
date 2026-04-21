@@ -1,0 +1,72 @@
+/* 
+    expertise-1-start
+*/
+.st-expertise-1 {
+    &-area {
+        padding: 180px 0;
+    }
+    &-wrap {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        margin-right: 50px;
+    }
+
+    &-item {
+        flex: 0 0 auto;
+        position: relative;
+        z-index: 1;
+
+        .title {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            font-size: 100px;
+
+            @media #{$xs} {
+                font-size: 60px;
+            }
+
+            @media #{$sm} {
+                font-size: 80px;
+            }
+
+            .icon {
+                margin-top: -20px;
+            }
+            
+
+            .text {
+                background: linear-gradient(0deg, #7b7b7b, #fff);
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                opacity: .3;
+                transition: .5s var(--st-cube-1);
+            }
+        }
+
+
+        .img-elm {
+            width: 230px;
+            height: 330px;
+            position: absolute;
+            z-index: -1;
+            // top: 50%;
+            // transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        &:hover {
+            .title {
+                .text {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    
+}
+
+/* 
+    expertise-1-end
+*/
