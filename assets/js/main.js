@@ -456,5 +456,123 @@ if($(".st-expertise-1-item").length) {
 }
 
 
+if($(".st-services-1-area").length) {
+
+	const section = document.querySelector(".st-services-1-area");
+	const prevImgs = gsap.utils.toArray(".st-services-1-item-prev-img-single");
+	const mainImgs = gsap.utils.toArray(".st-services-1-item-main-img .st-services-1-item-main-img-single");
+	const nextImgs = gsap.utils.toArray(".st-services-1-item-next-img .st-services-1-item-main-img-single");
+	const numbers = gsap.utils.toArray(".st-services-1-item-number .number-single");
+	const subtitles = gsap.utils.toArray(".st-services-1-item-subtitle .subtitle-elm");
+	const contents = gsap.utils.toArray(".st-services-1-item-content-box");
+
+	let currentIndex = 0;
+	let total = prevImgs.length;
+	let isAnimating = false;
+
+
+	gsap.set(prevImgs, { xPercent: 100 });
+	gsap.set(mainImgs, { xPercent: 105 });
+	gsap.set(nextImgs, { xPercent: 105 });
+	gsap.set(numbers, { y: 120 });
+
+	gsap.set([prevImgs[0], mainImgs[0], nextImgs[0]], { xPercent: 0 });
+	gsap.set(numbers[0], { y: 0 });
+
+
+	ScrollTrigger.create({
+	trigger: section,
+	start: "top top",
+	pin: ".st-services-1-pin",
+	anticipatePin: 1
+	});
+
+
+	function goToSlide(newIndex) {
+
+	if (isAnimating) return;
+	if (newIndex < 0 || newIndex >= total) return;
+
+	isAnimating = true;
+
+	const tl = gsap.timeline({
+		defaults: { duration: 0.8, ease: "power1.inOut" },
+		onComplete: () => {
+		currentIndex = newIndex;
+		isAnimating = false;
+		}
+	});
+
+	let out = currentIndex;
+	let next = newIndex;
+
+	tl.to(prevImgs[out], { xPercent: -100 }, 0)
+		.to(mainImgs[out], { xPercent: -105 , yPercent: -105 }, 0)
+		.to(nextImgs[out], { xPercent: -105 , yPercent: -105 }, 0)
+		.to(numbers[out], { y: -120 }, 0)
+
+		.fromTo(prevImgs[next], { xPercent: 100 }, { xPercent: 0 }, 0)
+		.fromTo(mainImgs[next], { xPercent: 105 , yPercent: 105 }, { xPercent: 0 , yPercent: 0 }, 0)
+		.fromTo(nextImgs[next], { xPercent: 105 , yPercent: 105 }, { xPercent: 0 , yPercent: 0 }, 0)
+		.fromTo(numbers[next], { y: 120 }, { y: 0 }, 0);
+
+		subtitles.forEach(el => el.classList.remove("active"));
+		contents.forEach(el => el.classList.remove("active"));
+
+		subtitles[next].classList.add("active");
+		contents[next].classList.add("active");
+	}
+
+
+	let observer;
+
+	ScrollTrigger.create({
+	trigger: section,
+	start: "top top",
+	end: "bottom bottom",
+
+	onEnter: () => enableObserver(),
+	onEnterBack: () => enableObserver(),
+	onLeave: () => disableObserver(),
+	onLeaveBack: () => disableObserver(),
+	});
+
+	function enableObserver() {
+
+	observer = Observer.create({
+		type: "wheel,touch,pointer",
+		wheelSpeed: 1,
+		tolerance: 10,
+
+		onDown: () => {
+		if (currentIndex < total - 1) {
+			goToSlide(currentIndex + 1);
+		}
+		},
+
+		onUp: () => {
+		if (currentIndex > 0) {
+			goToSlide(currentIndex - 1);
+		}
+		}
+	});
+	}
+
+	function disableObserver() {
+	if (observer) observer.kill();
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
 
 })(jQuery);

@@ -6,13 +6,7 @@
         background-color: #0c0c0c;
     }
 
-    &-vh {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+  
 
     &-wrap {
         display: flex;
@@ -87,7 +81,7 @@
 
     
                     &:not(:first-of-type) {
-                        transform: translateX(105%);
+                        // transform: translateX(105%);
                     }
                 }
             }
@@ -105,7 +99,7 @@
                 inset: 0;
 
                 &:not(:first-child) {
-                    transform: translateX(105%);
+                    // transform: translateX(105%);
                 }
             }
         }
@@ -136,7 +130,7 @@
                 position: absolute;
 
                 &:not(:first-child) {
-                    transform: translateY(100px);
+                    // transform: translateY(100px);
                 }
             }
         }
@@ -243,7 +237,25 @@
         
         
     }
+
+    &-area {
+        position: relative;
+        z-index: 1;
+    }
     
+
+    &-vh {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    // &-pin {
+    //     position: sticky;
+    //     top: 0;
+    // }
 }
 /* 
     services-1-end
