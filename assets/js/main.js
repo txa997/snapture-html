@@ -375,6 +375,35 @@ function afterPageLoad() {
 }
 
 
+// button-animation
+if ($(".wa_btn_split_1").length) {
+	var wa_btn_split_1 = $(".wa_btn_split_1");
+	gsap.registerPlugin(SplitText);
+
+	wa_btn_split_1.each(function (index, el) {
+		el.split = new SplitText(el, {
+			type: "words,chars",
+		});
+
+		$(el).on("mouseenter", function () {
+			el.split.chars.forEach((char, i) => {
+
+				gsap.fromTo(
+					char,
+					{ x: 15, opacity: 0, },
+					{
+						x: 0,
+						opacity: 1,
+						duration: 0.6,
+						ease: "power1.out",
+						delay: i * 0.07
+					}
+				);
+			});
+		});
+	});
+}
+
 
 // projects-1-slider
 if ($('.st_p1_slider').length) {
@@ -455,7 +484,7 @@ if($(".st-expertise-1-item").length) {
 	
 }
 
-
+// services-1
 if($(".st-services-1-area").length) {
 
 	const section = document.querySelector(".st-services-1-area");
@@ -565,14 +594,57 @@ if($(".st-services-1-area").length) {
 
 }
 
+// gallery-1-slider
+const st_g1_slider = new Swiper(".st_g1_slider", {
+	loop: true,
+	slidesPerView: "auto",
+	spaceBetween: 25,
+
+	freeMode: {
+		enabled: true,
+		momentum: true,
+		sticky: false,
+	},
+
+	mousewheel: {
+		enabled: true,
+		forceToAxis: true,
+		sensitivity: 1,
+		releaseOnEdges: true,
+	},
+
+});
+
+const swiperEl = document.querySelector(".st_g1_slider");
+
+if (swiperEl) {
+	swiperEl.addEventListener("wheel", function (e) {
+		e.preventDefault();
+
+		if (e.deltaY > 0) {
+			st_g1_slider.slideNext();
+		} else {
+			st_g1_slider.slidePrev();
+		}
+	}, { passive: false });
+}
 
 
 
+// footer-1-dot-animation
+const paths = document.querySelectorAll('.f1_dot_ani path');
 
-
-
-
-
-
+	paths.forEach((path) => {
+		function animatePath() {
+				gsap.to(path, {
+				opacity: Math.random() > 0.5 ? 1 : 0,
+				duration: Math.random() * 0.6 + 0.2, 
+				delay: Math.random() * 0.2, 
+				onComplete: animatePath, 
+				ease: "power1.inOut"
+			});
+	}
+  	animatePath(); 
+});
 
 })(jQuery);
