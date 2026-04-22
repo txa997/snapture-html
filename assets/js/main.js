@@ -647,4 +647,91 @@ const paths = document.querySelectorAll('.f1_dot_ani path');
   	animatePath(); 
 });
 
+
+
+
+
+
+let mouse = { x: 0, y: 0 };
+
+document.addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+function animate() {
+    document.querySelectorAll(".st-bg-border-line").forEach(line => {
+        const rect = line.getBoundingClientRect();
+
+        const x = mouse.x - rect.left;
+        const y = mouse.y - rect.top;
+
+        line.style.setProperty("--x", x + "px");
+        line.style.setProperty("--y", y + "px");
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+
+
+
+if ($(".st-hero-1-area").length) {
+
+    const items = document.querySelectorAll(".st-hero-1-area");
+
+    items.forEach((item) => {
+        const flair = item.querySelector(".st-hero-1-bg-sun");
+
+        // initial state
+        gsap.set(flair, {
+            scale: 0,
+            opacity: 0,
+            xPercent: -50,
+            yPercent: -80,
+            rotate: 0
+        });
+
+        // mouse enter
+        item.addEventListener("mouseenter", () => {
+            gsap.to(flair, {
+                scale: 1,
+                opacity: 1,
+                rotate: 14,
+                duration: 0.4,
+                ease: "power3.out"
+            });
+        });
+
+        // mouse move (optimized)
+        item.addEventListener("mousemove", (e) => {
+            const rect = item.getBoundingClientRect();
+
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            gsap.to(flair, {
+                x: x,
+                y: y,
+                duration: 0.12,
+                ease: "power3.out",
+                overwrite: "auto"
+            });
+        });
+
+        // mouse leave
+        item.addEventListener("mouseleave", () => {
+            gsap.to(flair, {
+                scale: 0,
+                opacity: 0,
+                rotate: 0,
+                duration: 0.4,
+                ease: "power3.in"
+            });
+        });
+    });
+}
+
 })(jQuery);
