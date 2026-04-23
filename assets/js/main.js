@@ -39,6 +39,19 @@ window.addEventListener('load', function(){
 */
 function afterPreloader() {
 
+	// wow-activation
+	if($('.wow').length){
+		var wow = new WOW({
+			boxClass:     'wow',
+			animateClass: 'animated',
+			offset:       50,
+			mobile:       true,
+			live:         true
+		});
+		wow.init();
+	};
+
+
 	/* 
 		only-LTR-direction
 	*/
@@ -193,6 +206,58 @@ function afterPreloader() {
 		}
 		wa_split_text();
 
+
+		document.querySelectorAll(".wa_split_2").forEach((atEl) => {
+			const atSplit = new SplitText(atEl, {
+				type: "words,chars",
+				wordsClass: "word",
+				charsClass: "char"
+			});
+
+			let atDuration = parseFloat(atEl.getAttribute("data-speed")) || 1;
+			let atDelay = parseFloat(atEl.getAttribute("data-delay")) || 0;
+
+			if (window.innerWidth <= 768) {
+				atDuration = atDuration * 0.3; 
+			}
+
+			gsap.set(atSplit.words, {
+				willChange: "transform",
+				perspective: 1000,
+				transformStyle: "preserve-3d"
+			});
+
+			gsap.set(atSplit.chars, {
+				willChange: "transform",
+				opacity: 0,
+				rotateX: -80,
+				transformOrigin: "center center -10px"
+			});
+
+			gsap.set(atEl, {
+				perspective: 1000,
+				transformStyle: "preserve-3d"
+			});
+
+			gsap.to(atSplit.chars, {
+				scrollTrigger: {
+					trigger: atEl,
+					start: "top 80%",
+				},
+				opacity: 1,
+				rotateX: 0,
+				duration: atDuration,
+				delay: atDelay,
+				ease: "power3.out",
+				stagger: {
+					each: 0.05,
+					from: "center",
+					grid: "auto",
+				},
+			});
+		});
+
+
 		/* 
 			hero-4-title-animation
 		*/
@@ -242,7 +307,7 @@ function afterPreloader() {
 				charsClass: "char"
 			});
 
-			let atDuration = parseFloat(atEl.getAttribute("data-speed")) || .7;
+			let atDuration = parseFloat(atEl.getAttribute("data-speed")) || 1;
 			let atDelay = parseFloat(atEl.getAttribute("data-delay")) || 0;
 
 			if (window.innerWidth <= 768) {
@@ -344,13 +409,22 @@ function afterPreloader() {
 
 	// hero-1-tl-1
 	let hero1tl1 = gsap.timeline()
-	hero1tl1.from(".xr-hero-1-img", {
+	hero1tl1.from(".st-hero-1-gallery", {
 		y: 50,
 		autoAlpha: 0,
 		duration: 1,
 		ease: "expo.out",
-		delay: 1,
+		delay: .8,
 	})
+	hero1tl1.from(".st-hero-1-gallery-slider .swiper-slide", {
+		autoAlpha: 0,
+		duration: 1,
+		ease: "expo.out",
+		stagger: {
+			each: 0.05,
+			from: "center",
+		},
+	},"<50%")
 
 
 
@@ -367,6 +441,76 @@ function afterPreloader() {
 function afterPageLoad() {
 
 	
+	// add-active-class
+	const waAddClass = gsap.utils.toArray('.wa_add_class');
+	waAddClass.forEach(waAddClassItem => {
+		gsap.to(waAddClassItem, {
+			scrollTrigger: {
+				trigger: waAddClassItem,
+				start: "top 90%",
+				end: "bottom bottom",
+				toggleActions: "play none none reverse",
+				toggleClass: "active",
+				once: true,
+				markers: false,
+			}
+		});
+	});
+
+	// hero-1-sun-animation
+	if ($(".st-hero-1-area").length) {
+		const items = document.querySelectorAll(".st-hero-1-area");
+		items.forEach((item) => {
+			const flair = item.querySelector(".st-hero-1-bg-sun");
+
+			// initial state
+			gsap.set(flair, {
+				scale: 0,
+				opacity: 0,
+				xPercent: -50,
+				yPercent: -50,
+				rotate: 0
+			});
+
+			// mouse enter
+			item.addEventListener("mouseenter", () => {
+				gsap.to(flair, {
+					scale: 1,
+					opacity: 1,
+					rotate: 14,
+					duration: 0.4,
+					ease: "power3.out"
+				});
+			});
+
+			// mouse move (optimized)
+			item.addEventListener("mousemove", (e) => {
+				const rect = item.getBoundingClientRect();
+
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+
+				gsap.to(flair, {
+					x: x,
+					y: y,
+					duration: 0.8,
+					ease: "power3.out",
+					overwrite: "auto"
+				});
+			});
+
+			// mouse leave
+			item.addEventListener("mouseleave", () => {
+				gsap.to(flair, {
+					scale: 0,
+					opacity: 0,
+					rotate: 0,
+					duration: 0.4,
+					ease: "power3.in"
+				});
+			});
+		});
+	}
 
 
 /* 
@@ -404,6 +548,183 @@ if ($(".wa_btn_split_1").length) {
 	});
 }
 
+// home-1-bg-line-animation
+if($(".st-bg-border-line").length) {
+	let mouse = { x: 0, y: 0 };
+
+	document.addEventListener("mousemove", (e) => {
+		mouse.x = e.clientX;
+		mouse.y = e.clientY;
+	});
+	
+	function animate() {
+		document.querySelectorAll(".st-bg-border-line").forEach(line => {
+			const rect = line.getBoundingClientRect();
+	
+			const x = mouse.x - rect.left;
+			const y = mouse.y - rect.top;
+	
+			line.style.setProperty("--x", x + "px");
+			line.style.setProperty("--y", y + "px");
+		});
+	
+		requestAnimationFrame(animate);
+	}
+	
+	animate();
+}
+
+// services-1
+if (window.matchMedia("(min-width: 1400px)").matches) {
+	if($(".st-services-1-area").length) {
+
+		const section = document.querySelector(".st-services-1-area");
+		const prevImgs = gsap.utils.toArray(".st-services-1-item-prev-img-single");
+		const mainImgs = gsap.utils.toArray(".st-services-1-item-main-img .st-services-1-item-main-img-single");
+		const nextImgs = gsap.utils.toArray(".st-services-1-item-next-img .st-services-1-item-main-img-single");
+		const numbers = gsap.utils.toArray(".st-services-1-item-number .number-single");
+		const subtitles = gsap.utils.toArray(".st-services-1-item-subtitle .subtitle-elm");
+		const contents = gsap.utils.toArray(".st-services-1-item-content-box");
+
+		let currentIndex = 0;
+		let total = prevImgs.length;
+		let isAnimating = false;
+
+
+		gsap.set(prevImgs, { xPercent: 100 });
+		gsap.set(mainImgs, { xPercent: 105 });
+		gsap.set(nextImgs, { xPercent: 105 });
+		gsap.set(numbers, { y: 120 });
+
+		gsap.set([prevImgs[0], mainImgs[0], nextImgs[0]], { xPercent: 0 });
+		gsap.set(numbers[0], { y: 0 });
+
+
+		ScrollTrigger.create({
+			trigger: section,
+			start: "top top",
+			pin: ".st-services-1-pin",
+			anticipatePin: 1
+		});
+
+
+		function goToSlide(newIndex) {
+
+		if (isAnimating) return;
+		if (newIndex < 0 || newIndex >= total) return;
+
+		isAnimating = true;
+
+		const tl = gsap.timeline({
+			defaults: { duration: 0.8, ease: "power1.inOut" },
+			onComplete: () => {
+			currentIndex = newIndex;
+			isAnimating = false;
+			}
+		});
+
+		let out = currentIndex;
+		let next = newIndex;
+
+		tl.to(prevImgs[out], { xPercent: -100 }, 0)
+			.to(mainImgs[out], { xPercent: -105 , yPercent: -105 }, 0)
+			.to(nextImgs[out], { xPercent: -105 , yPercent: -105 }, 0)
+			.to(numbers[out], { y: -120 }, 0)
+
+			.fromTo(prevImgs[next], { xPercent: 100 }, { xPercent: 0 }, 0)
+			.fromTo(mainImgs[next], { xPercent: 105 , yPercent: 105 }, { xPercent: 0 , yPercent: 0 }, 0)
+			.fromTo(nextImgs[next], { xPercent: 105 , yPercent: 105 }, { xPercent: 0 , yPercent: 0 }, 0)
+			.fromTo(numbers[next], { y: 120 }, { y: 0 }, 0);
+
+			subtitles.forEach(el => el.classList.remove("active"));
+			contents.forEach(el => el.classList.remove("active"));
+
+			subtitles[next].classList.add("active");
+			contents[next].classList.add("active");
+		}
+
+
+		let observer;
+
+		ScrollTrigger.create({
+			trigger: section,
+			start: "top top",
+			end: "bottom bottom",
+
+			onEnter: () => enableObserver(),
+			onEnterBack: () => enableObserver(),
+			onLeave: () => disableObserver(),
+			onLeaveBack: () => disableObserver(),
+		});
+
+		function enableObserver() {
+
+		observer = Observer.create({
+			type: "wheel,touch,pointer",
+			wheelSpeed: 1,
+			tolerance: 10,
+
+			onDown: () => {
+				if (currentIndex < total - 1) {
+					goToSlide(currentIndex + 1);
+				}
+			},
+
+			onUp: () => {
+				if (currentIndex > 0) {
+					goToSlide(currentIndex - 1);
+				}
+			}
+		});
+		}
+
+		function disableObserver() {
+		if (observer) observer.kill();
+		}
+
+
+	}
+}
+
+// fact-1-active-class-add
+if($(".st-facts-1-client").length) {
+	const section = document.querySelector(".st-facts-1-client");
+
+	if (section) {
+	  ScrollTrigger.create({
+		trigger: section,
+		start: "top 10%",
+		once: true,
+		toggleClass: {
+		  targets: section,
+		  className: "active",
+		  markers: true,
+
+		},
+	  });
+	}
+}
+
+
+// choose-1-lens
+let stC1bgLens = gsap.timeline({
+	scrollTrigger: {
+		trigger: ".st-choose-1-bg-lens",
+		toggleActions: "play none none none",
+		start: "top 86%",
+		end: "top 20%",
+		markers: false,
+		scrub: true,
+	},
+})
+stC1bgLens.from(".st-choose-1-bg-lens img", {
+	yPercent: -100,
+	rotate: 90,
+})
+stC1bgLens.from(".st-choose-1-bg-lens .shadow-elm", {
+	autoAlpha: 0,
+},"<20%")
+
 
 // projects-1-slider
 if ($('.st_p1_slider').length) {
@@ -412,7 +733,7 @@ if ($('.st_p1_slider').length) {
 		spaceBetween: 0,
 		speed: 1000,
 
-		// autoplay: { delay: 6000 },
+		autoplay: { delay: 5000 },
 
 
 		// centeredSlides: true,
@@ -456,6 +777,11 @@ if ($('.st_p1_slider').length) {
 
 }
 		
+
+if ($("#beforeafter").length) {
+	$("#beforeafter").twentytwenty();
+} 
+
 // expertise-1-img-cursor-follow
 if($(".st-expertise-1-item").length) {
 	const featureItems = document.querySelectorAll(".st-expertise-1-item");
@@ -484,150 +810,17 @@ if($(".st-expertise-1-item").length) {
 	
 }
 
-// services-1
-if($(".st-services-1-area").length) {
 
-	const section = document.querySelector(".st-services-1-area");
-	const prevImgs = gsap.utils.toArray(".st-services-1-item-prev-img-single");
-	const mainImgs = gsap.utils.toArray(".st-services-1-item-main-img .st-services-1-item-main-img-single");
-	const nextImgs = gsap.utils.toArray(".st-services-1-item-next-img .st-services-1-item-main-img-single");
-	const numbers = gsap.utils.toArray(".st-services-1-item-number .number-single");
-	const subtitles = gsap.utils.toArray(".st-services-1-item-subtitle .subtitle-elm");
-	const contents = gsap.utils.toArray(".st-services-1-item-content-box");
-
-	let currentIndex = 0;
-	let total = prevImgs.length;
-	let isAnimating = false;
-
-
-	gsap.set(prevImgs, { xPercent: 100 });
-	gsap.set(mainImgs, { xPercent: 105 });
-	gsap.set(nextImgs, { xPercent: 105 });
-	gsap.set(numbers, { y: 120 });
-
-	gsap.set([prevImgs[0], mainImgs[0], nextImgs[0]], { xPercent: 0 });
-	gsap.set(numbers[0], { y: 0 });
-
-
-	ScrollTrigger.create({
-	trigger: section,
-	start: "top top",
-	pin: ".st-services-1-pin",
-	anticipatePin: 1
-	});
-
-
-	function goToSlide(newIndex) {
-
-	if (isAnimating) return;
-	if (newIndex < 0 || newIndex >= total) return;
-
-	isAnimating = true;
-
-	const tl = gsap.timeline({
-		defaults: { duration: 0.8, ease: "power1.inOut" },
-		onComplete: () => {
-		currentIndex = newIndex;
-		isAnimating = false;
-		}
-	});
-
-	let out = currentIndex;
-	let next = newIndex;
-
-	tl.to(prevImgs[out], { xPercent: -100 }, 0)
-		.to(mainImgs[out], { xPercent: -105 , yPercent: -105 }, 0)
-		.to(nextImgs[out], { xPercent: -105 , yPercent: -105 }, 0)
-		.to(numbers[out], { y: -120 }, 0)
-
-		.fromTo(prevImgs[next], { xPercent: 100 }, { xPercent: 0 }, 0)
-		.fromTo(mainImgs[next], { xPercent: 105 , yPercent: 105 }, { xPercent: 0 , yPercent: 0 }, 0)
-		.fromTo(nextImgs[next], { xPercent: 105 , yPercent: 105 }, { xPercent: 0 , yPercent: 0 }, 0)
-		.fromTo(numbers[next], { y: 120 }, { y: 0 }, 0);
-
-		subtitles.forEach(el => el.classList.remove("active"));
-		contents.forEach(el => el.classList.remove("active"));
-
-		subtitles[next].classList.add("active");
-		contents[next].classList.add("active");
-	}
-
-
-	let observer;
-
-	ScrollTrigger.create({
-	trigger: section,
-	start: "top top",
-	end: "bottom bottom",
-
-	onEnter: () => enableObserver(),
-	onEnterBack: () => enableObserver(),
-	onLeave: () => disableObserver(),
-	onLeaveBack: () => disableObserver(),
-	});
-
-	function enableObserver() {
-
-	observer = Observer.create({
-		type: "wheel,touch,pointer",
-		wheelSpeed: 1,
-		tolerance: 10,
-
-		onDown: () => {
-		if (currentIndex < total - 1) {
-			goToSlide(currentIndex + 1);
-		}
-		},
-
-		onUp: () => {
-		if (currentIndex > 0) {
-			goToSlide(currentIndex - 1);
-		}
-		}
-	});
-	}
-
-	function disableObserver() {
-	if (observer) observer.kill();
-	}
-
-
-}
 
 // gallery-1-slider
 const st_g1_slider = new Swiper(".st_g1_slider", {
 	loop: true,
 	slidesPerView: "auto",
 	spaceBetween: 25,
-
-	freeMode: {
-		enabled: true,
-		momentum: true,
-		sticky: false,
-	},
-
-	mousewheel: {
-		enabled: true,
-		forceToAxis: true,
-		sensitivity: 1,
-		releaseOnEdges: true,
-	},
+	freeMode: true,
 
 });
 
-const swiperEl = document.querySelector(".st_g1_slider");
-
-if (swiperEl) {
-	swiperEl.addEventListener("wheel", function (e) {
-		e.preventDefault();
-
-		if (e.deltaY > 0) {
-			st_g1_slider.slideNext();
-		} else {
-			st_g1_slider.slidePrev();
-		}
-	}, { passive: false });
-}
 
 
 
@@ -652,86 +845,118 @@ const paths = document.querySelectorAll('.f1_dot_ani path');
 
 
 
-let mouse = { x: 0, y: 0 };
 
-document.addEventListener("mousemove", (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-});
 
-function animate() {
-    document.querySelectorAll(".st-bg-border-line").forEach(line => {
-        const rect = line.getBoundingClientRect();
+if (document.querySelectorAll("#wa_liquid_img2").length) {
+	PIXI.utils.skipHello(); 
+	function initWaLiquidEffect2(waWrapper2) {
+		const waImg2 = waWrapper2.querySelector("img");
+		if (!waImg2) return;
 
-        const x = mouse.x - rect.left;
-        const y = mouse.y - rect.top;
+		const waImageURL2 = waImg2.getAttribute("src");
+		waImg2.remove();
 
-        line.style.setProperty("--x", x + "px");
-        line.style.setProperty("--y", y + "px");
-    });
+		const { width: waWidth2, height: waHeight2 } = waWrapper2.getBoundingClientRect();
 
-    requestAnimationFrame(animate);
+		const waApp2 = new PIXI.Application({
+			width: waWidth2,
+			height: waHeight2,
+			transparent: true,
+			autoDensity: true,
+			resolution: window.devicePixelRatio,
+		});
+		waApp2.view.style.pointerEvents = "none";
+
+		waWrapper2.appendChild(waApp2.view);
+
+		const waDisplacementURL2 = "assets/img/hero/h1-camera-lens.png";
+
+		waApp2.loader
+			.add("waHero2", waImageURL2)
+			.add("waDisplacement2", waDisplacementURL2)
+			.load((waLoader2, waResources2) => {
+				const waContainer2 = new PIXI.Container();
+				waApp2.stage.addChild(waContainer2);
+
+				const waHero2 = new PIXI.Sprite(waResources2.waHero2.texture);
+				waContainer2.addChild(waHero2);
+
+				const waTextureRatio2 = waHero2.texture.width / waHero2.texture.height;
+				const waContainerRatio2 = waWidth2 / waHeight2;
+
+				if (waContainerRatio2 > waTextureRatio2) {
+					waHero2.width = waWidth2;
+					waHero2.height = waWidth2 / waTextureRatio2;
+				} else {
+					waHero2.height = waHeight2;
+					waHero2.width = waHeight2 * waTextureRatio2;
+				}
+
+				waHero2.x = (waWidth2 - waHero2.width) / 2;
+				waHero2.y = (waHeight2 - waHero2.height) / 2;
+
+				const waDispSprite2 = new PIXI.Sprite(waResources2.waDisplacement2.texture);
+				waDispSprite2.texture.baseTexture.wrapMode = PIXI.WRAP_MODES.REPEAT;
+
+				const waDispFilter2 = new PIXI.filters.DisplacementFilter(waDispSprite2);
+				waDispSprite2.scale.set(2);
+
+				waApp2.stage.addChild(waDispSprite2);
+				waContainer2.filters = [waDispFilter2];
+
+				let animationActive = false;
+
+				waApp2.ticker.add(() => {
+					if (animationActive) {
+						waDispSprite2.x += 1;
+						waDispSprite2.y += 1;
+					}
+				});
+
+				waDispFilter2.scale.x = -400;
+				waDispFilter2.scale.y = -400;
+
+				function waPlayDistortionOut2() {
+					gsap.to(waDispFilter2.scale, {
+						x: 0,
+						y: 0,
+						duration: 2,
+						ease: "expo.out",
+						onComplete: () => {
+							animationActive = true;
+						}
+					});
+				}
+
+				waWrapper2._playDistortionOut = waPlayDistortionOut2;
+			});
+	}
+
+	const waObserver2 = new IntersectionObserver((entries, observer) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				if (entry.target._playDistortionOut) {
+					entry.target._playDistortionOut();
+				}
+				observer.unobserve(entry.target);
+			}
+		});
+	}, { threshold: .3 });
+
+	document.querySelectorAll("#wa_liquid_img2").forEach((el) => {
+		initWaLiquidEffect2(el);
+		waObserver2.observe(el);
+
+		if (el.getBoundingClientRect().top < window.innerHeight && el.getBoundingClientRect().bottom > 0) {
+			let checkReady = setInterval(() => {
+				if (el._playDistortionOut) {
+					el._playDistortionOut();
+					clearInterval(checkReady);
+				}
+			}, 50);
+		}
+	});
 }
 
-animate();
-
-
-
-
-if ($(".st-hero-1-area").length) {
-
-    const items = document.querySelectorAll(".st-hero-1-area");
-
-    items.forEach((item) => {
-        const flair = item.querySelector(".st-hero-1-bg-sun");
-
-        // initial state
-        gsap.set(flair, {
-            scale: 0,
-            opacity: 0,
-            xPercent: -50,
-            yPercent: -80,
-            rotate: 0
-        });
-
-        // mouse enter
-        item.addEventListener("mouseenter", () => {
-            gsap.to(flair, {
-                scale: 1,
-                opacity: 1,
-                rotate: 14,
-                duration: 0.4,
-                ease: "power3.out"
-            });
-        });
-
-        // mouse move (optimized)
-        item.addEventListener("mousemove", (e) => {
-            const rect = item.getBoundingClientRect();
-
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            gsap.to(flair, {
-                x: x,
-                y: y,
-                duration: 0.12,
-                ease: "power3.out",
-                overwrite: "auto"
-            });
-        });
-
-        // mouse leave
-        item.addEventListener("mouseleave", () => {
-            gsap.to(flair, {
-                scale: 0,
-                opacity: 0,
-                rotate: 0,
-                duration: 0.4,
-                ease: "power3.in"
-            });
-        });
-    });
-}
 
 })(jQuery);

@@ -339,36 +339,59 @@ if ($('.wa_current_year').length) {
     $('.wa_current_year').text(currentYear);
 }
 
-
-// add-active-class
-const waAddClass = gsap.utils.toArray('.wa_add_class');
-waAddClass.forEach(waAddClassItem => {
-	gsap.to(waAddClassItem, {
-		scrollTrigger: {
-			trigger: waAddClassItem,
-			start: "top 90%",
-			end: "bottom bottom",
-			toggleActions: "play none none reverse",
-			toggleClass: "active",
-			once: true,
-			markers: false,
-		}
-	});
-});
+// get-height
+if ($(".wa_height_set").length) { 
+	const wa_height_set = document.querySelector('.wa_height_set');
+	const wa_height_get = document.querySelector('.wa_height_get');
+	function setDynamicHeight() {
+	if (wa_height_get && wa_height_set) {
+		wa_height_set.style.height = wa_height_get.offsetHeight + 'px';
+	}
+	}
+	setDynamicHeight();
+	window.addEventListener('resize', setDynamicHeight);
+}
 
 
+if ($(".wa_cursor_magnetic_1").length) {
+    var waMagnets3 = document.querySelectorAll('.wa_cursor_magnetic_1');
+    var waStrength3 = 100;
 
-// wow-activation
-if($('.wow').length){
-	var wow = new WOW({
-		boxClass:     'wow',
-		animateClass: 'animated',
-		offset:       50,
-		mobile:       true,
-		live:         true
-	});
-	wow.init();
-};
+    waMagnets3.forEach((magnet) => {
+        magnet.addEventListener('mousemove', moveMagnet3);
+        magnet.addEventListener('mouseout', function(event) {
+            const innerElements = event.currentTarget.querySelectorAll('.wa_cursor_magnetic_1_elm');
+            innerElements.forEach((elm) => {
+                gsap.to(elm, {
+                    x: 0,
+                    y: 0,
+                    duration: 1,
+                    ease: "elastic.out(1, 0.3)"
+                });
+            });
+        });
+    });
+
+    function moveMagnet3(event) {
+        var magnetButton = event.currentTarget;
+        var bounding = magnetButton.getBoundingClientRect();
+        const innerElements = magnetButton.querySelectorAll('.wa_cursor_magnetic_1_elm');
+
+        const xMove = (((event.clientX - bounding.left) / magnetButton.offsetWidth) - 0.5) * waStrength3;
+        const yMove = (((event.clientY - bounding.top) / magnetButton.offsetHeight) - 0.5) * waStrength3;
+
+        innerElements.forEach((elm) => {
+            gsap.to(elm, {
+                x: xMove,
+                y: yMove,
+                duration: 1,
+                ease: "elastic.out(1, 0.3)"
+            });
+        });
+    }
+}
+
+
 
 
 // progress-animation

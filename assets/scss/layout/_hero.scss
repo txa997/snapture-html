@@ -275,23 +275,40 @@
             &-img {
                 border-radius: 22px;
                 height: 245px;
-
+                transition: 1s var(--st-cube-1);
             }
 
             .swiper-wrapper {
                 .swiper-slide {
-                    transition: 1s var(--st-cube-1);
+         
 
                     &:is(.swiper-slide-active) {
-                        transform: scale(1.1);
-                        transition-delay: .5s;
+                        .st-hero-1-gallery-slider-img {
+                            transform: scale(1.1);
+                            transition-delay: .5s;
+                        }
+
                     }
                 }
             }
         }
     }
 
-
+    &-bg-sun {
+        width: 150px;
+        height: 150px;
+        background: rgba(255, 252, 252, 0.9);
+        border-radius: 50%;
+        box-shadow: 0px 0px 100px 100px #ff8800;
+        position: absolute;
+        z-index: -3;
+        filter: blur(1px);
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        will-change: transform;
+        transition: unset;
+    }
     
 }
 

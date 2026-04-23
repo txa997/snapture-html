@@ -2,6 +2,45 @@
     elements-start
 */
 
+
+.st-bg-border-grid {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 50px;
+    position: relative;
+    justify-content: space-evenly;
+}
+
+.st-bg-border-line {
+    position: relative;
+    width: 2px;
+    height: 100%;
+    border-left: 1px solid rgba(255,255,255, 0.1);
+    
+    background: 
+        radial-gradient(
+            100px circle at var(--x, -100px) var(--y, -100px),
+            red 0%,
+            transparent 70%
+        );
+    
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    padding-left: 1px; /* border thickness */
+}
+
+
+.st-bg-border-line::after {
+    left: var(--x);
+    top: var(--y);
+    opacity: var(--opacity, 0);
+}
+
 /* 
     elements-end
 */

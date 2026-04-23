@@ -27,7 +27,8 @@
         max-width: 420px;
         height: 610px;
         border-radius: 30px;
-
+        width: 100%;
+        
         @media #{$xs} {
             height: 400px;
         }
@@ -190,7 +191,7 @@
         overflow: hidden;
 
         &-elm {
-            font-size: 450px;
+            font-size: 420px;
             font-weight: 600;
             width: max-content;
             color: #000;
@@ -198,28 +199,32 @@
             letter-spacing: -0.10em;
             text-align: center;
 
-            @media #{$xxl} {
+            @media #{$xxxl} {
                 font-size: 350px;
             }
 
+            @media #{$xxl} {
+                font-size: 320px;
+            }
+
             @media #{$xl} {
-                font-size: 280px;
+                font-size: 260px;
             }
 
             @media #{$lg} {
-                font-size: 220px;
+                font-size: 200px;
             }
 
             @media #{$md} {
-                font-size: 160px;
+                font-size: 140px;
             }
 
             @media #{$xs} {
-                font-size: 80px;
+                font-size: 60px;
             }
 
             @media #{$sm} {
-                font-size: 120px;
+                font-size: 100px;
             }
         }
     }
@@ -234,6 +239,42 @@
 
         @media #{$xs} {
             top: -30px;
+        }
+    }
+
+
+    &-bg-line {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .st-bg-border {
+            &-grid {
+                height: 90%;
+            }
+            &-line {
+                &:is(.has-top) {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    border-top: 1px solid rgba(255,255,255, 0.1);
+                    border-left: 0;
+                }
+                &:is(.has-bottom) {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    border-bottom: 1px solid rgba(255,255,255, 0.1);
+                    border-left: 0;
+                }
+            }
         }
     }
 }

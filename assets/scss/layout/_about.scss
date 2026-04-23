@@ -9,13 +9,15 @@
 
         .sec-disc {
             margin-top: 29px;
+            max-width: 420px;
         }
     }
 
     &-wrap {
         display: grid;
         gap: 50px;
-        grid-template-columns: 0.27fr 0.29fr 0.44fr;
+        grid-template-columns: 1fr 1fr 1.6fr;
+
 
         @media #{$xxxl,$xxl,$xl} {
             grid-template-columns: 1fr 1fr 1fr;
@@ -28,6 +30,7 @@
         @media #{$md,$xs} {
             grid-template-columns: 1fr;
         }
+
     }
 
 
@@ -88,7 +91,7 @@
         &-single {
             border: 4px solid #252424;
             padding: 27px 34px;
-            transition: .4s var(--st-cube-1);
+            transition: var(--st-cube-2);
             position: relative;
             z-index: 1;
             overflow: hidden;
@@ -109,19 +112,23 @@
                 right: -40px;
                 filter: blur(30px);
                 opacity: 0;
-                transition: .4s var(--st-cube-1);
+                transition: var(--st-cube-2);
             }
 
             .title {
                 font-size: 36px;
                 margin-bottom: 20px;
-
+                transition: var(--st-cube-2);
                 @media #{$xxxl,$xxl,$xl,$lg,$md} {
                     font-size: 26px;
                 }
 
                 @media #{$xs} {
                     font-size: 22px;
+                }
+
+                &:hover {
+                    color: var(--st-clr-pr-1);
                 }
             }
             
@@ -135,7 +142,7 @@
             }
 
             .disc {
-                max-width: 520px;
+                max-width: 530px;
             }
 
             &:hover {

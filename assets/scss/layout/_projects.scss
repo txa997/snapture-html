@@ -11,10 +11,14 @@
         gap: 20px 100px;
         flex-wrap: wrap;
         margin-bottom: 40px;
-
+        background-color: #0D0D0D;
 
         .st-subtitle-1 {
             margin-bottom: 0;
+        }
+
+        .st-sec-title-1  {
+
         }
     }
 
@@ -78,6 +82,15 @@
 
             .title {
                 font-size: 36px;
+                transition: var(--st-cube-2);
+
+                @media #{$md,$xs} {
+                    font-size: 26px;
+                }
+
+                &:hover {
+                    color: var(--st-clr-pr-1);
+                }
             }
 
             .content-wrap {
@@ -165,6 +178,24 @@
                 }
             }
 
+            &:hover {
+                &::after {
+                    opacity: 1;
+
+
+                }
+
+                .logo-img {
+                    opacity: 1;
+                }
+                .overly-box {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                .number {
+                    color: #fff
+                }
+            }
 
         }
     }
@@ -175,6 +206,8 @@
             display: flex;
             justify-content: center;
             margin-bottom: 50px;
+            flex-wrap: wrap;
+            flex: 30px 0;
 
             li {
                 min-width: 200px;
@@ -218,6 +251,22 @@
                 }
             }
         }
+
+        &-pane {
+            position: relative;
+            z-index: 1;
+            .tab-pane {
+                display: block !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+
+                &:is(.active) {
+                    z-index: 2;
+                }
+            }
+        }
     }
 
 
@@ -239,27 +288,48 @@
                     opacity: 1;
 
                     .st-projects-1-slider-card {
-                        &::after {
-                            opacity: 1;
-    
 
-                        }
-
-                        .logo-img {
-                            opacity: 1;
-                        }
-                        .overly-box {
-                            opacity: 1;
-                            transform: scale(1);
-                        }
-                        .number {
-                            color: #fff
-                        }
                     }
                 }
 
                 &:is(.swiper-slide-next) {
                     opacity: 1;
+                }
+            }
+        }
+    }
+
+
+    &-bg-line {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .st-bg-border {
+            &-grid {
+                height: 90%;
+            }
+            &-line {
+                &:is(.has-top) {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    border-top: 1px solid rgba(255,255,255, 0.1);
+                    border-left: 0;
+                }
+                &:is(.has-bottom) {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    border-bottom: 1px solid rgba(255,255,255, 0.1);
+                    border-left: 0;
                 }
             }
         }

@@ -63,6 +63,11 @@
             font-size: 16px;
             color: #fff;
             border: 1px solid rgb(255 255 255 / 60%);
+            transition: var(--st-cube-2);
+
+            &:hover {
+                background-color: var(--st-clr-pr-1);
+            }
         }
     }
 
@@ -96,7 +101,7 @@
                 padding: 21px 0;
                 display: inline-flex;
                 align-items: center;
-                transition: .4s var(--st-cube-1);
+                transition: var(--st-cube-2);
 
                 &::after {
                     content: "";
@@ -108,7 +113,7 @@
                     transform: translateY(-50%) scale(2);
                     left: -20px;
                     opacity: 0;
-                    transition: .4s var(--st-cube-1);
+                    transition: var(--st-cube-2);
                 }
             }
 
@@ -166,7 +171,7 @@
                 visibility: hidden;
                 transform: translateY(10px);
                 transform-origin: top;
-                transition: .4s var(--st-cube-1);
+                transition: var(--st-cube-2);
 
             
                 li {

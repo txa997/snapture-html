@@ -30,20 +30,19 @@
   0% {
     opacity: 0;
     perspective: 2000px;
-    transform: rotateX(83deg) translateY(82px);
+    transform: rotateX(-50deg) translateY(60px) scale3d(0.84, 0.81, 1);
     filter: blur(5px);
   }
 
   100% {
     perspective: 2000px;
-    transform: rotateX(0deg) translateY(0px);
+    transform: rotateX(0deg) translateY(0px) scale3d(1, 1, 1);
   }
 }
-
 .fadeInUp2 {
   -webkit-animation-name: fadeInUp2;
   animation-name: fadeInUp2;
-  animation-duration: 1000ms;
+  animation-duration: 800ms;
   animation-timing-function: var(--xr-cube-1);
 }
 
