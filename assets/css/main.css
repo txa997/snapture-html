@@ -2508,16 +2508,8 @@ input:focus::placeholder, textarea:focus::placeholder {
 .wa_sticky_header:is(.wa_sticky):is(.wa_sticky_show) {
   transform: translateY(0%);
 }
-.wa_sticky_header:is(.sr-header-1-area) {
-  top: 24px;
-}
-.wa_sticky_header:is(.sr-header-1-area):is(.wa_sticky_show) .sr-header-1-wrap {
-  background-color: #fff;
-  box-shadow: 1px 10px 11px rgba(0, 0, 0, 0.04);
-}
-.wa_sticky_header:is(.sr-header-1-area):is(.wa_sticky_show):is(.has-header-2) .sr-header-1-wrap {
+.wa_sticky_header:is(.st-header-1-area):is(.wa_sticky_show) {
   background-color: #000;
-  box-shadow: 0px 2px 16px rgba(255, 255, 255, 0.1);
 }
 
 /* 
