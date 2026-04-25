@@ -10,6 +10,14 @@
     }
 }
 
+@media (min-width: 1600px) {
+    .container{
+        &.st-container-2 {
+            max-width: 1584px;
+        }
+    }
+}
+
 /* 
     custom-container-end
 */

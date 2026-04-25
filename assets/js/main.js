@@ -427,7 +427,41 @@ function afterPreloader() {
 	},"<50%")
 
 
-
+	// hero-2-slider
+	if ($('.st_h2_gallery_slider').length) {
+		let st_h2_gallery_slider = new Swiper('.st_h2_gallery_slider', {
+			loop: true,
+			spaceBetween: 20,
+			speed: 1000,
+			slidesPerView: "auto",
+			centeredSlides: true,
+			roundLengths: true,
+	
+			autoplay: { 
+				delay: 5000,
+				disableOnInteraction: false,
+			},
+	
+			on: {
+				init: function () {
+					setTimeout(() => {
+						this.slideNext();
+					}, 100); 
+				},
+	
+				slideChangeTransitionEnd: function () {
+					const elements = document.querySelectorAll('.st-hero-2-man, .st-hero-2-slider');
+	
+					elements.forEach(el => el.classList.add('active'));
+	
+					setTimeout(() => {
+						elements.forEach(el => el.classList.remove('active'));
+					}, 1000);
+				}
+			}
+		});
+	}
+		
 	
 /* 
 	after-preloader-end

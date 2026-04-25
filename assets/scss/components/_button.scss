@@ -59,6 +59,99 @@
     }
 }
 
+
+.st-pr-btn-2 {
+    font-family: var(--st-font-4);
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    color: var(--st-clr-h-2);
+    transition: var(--st-cube-2);
+    flex: 0 0 auto;
+
+    .text {
+        background-color: var(--st-clr-pr-2);
+        padding: 16px 29px;
+        border-radius: 100px;
+        overflow: hidden;
+        transition: 0.4s cubic-bezier(0.28, 0.23, 0.56, 1.39);
+        transform-origin: 50% 50% 0px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .icon {
+        width: 54px;
+        height: 54px;
+        background: var(--st-clr-pr-2);
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        transform-origin: 50% 50% 0px;
+        transition: 0.4s cubic-bezier(0.28, 0.23, 0.56, 1.39);
+        display: flex;
+        align-items: center;
+
+        .icon-box {
+            background-color: var(--st-clr-h-2);
+            box-shadow: inset 0px 0px 8px #FFFFFF;
+            border-radius: 22px;
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .icon-2 {
+        width: 54px;
+        height: 54px;
+        background: var(--st-clr-pr-2);
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        position: absolute;
+        top: 7px;
+        left: 0;
+        transform-origin: 50% 50% 0px;
+        transform: scale(0) rotate(-45deg);
+        transition: 0.4s cubic-bezier(0.28, 0.23, 0.56, 1.39);
+
+        .icon-box {
+            background-color: var(--st-clr-h-2);
+            box-shadow: inset 0px 0px 8px #FFFFFF;
+            border-radius: 22px;
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &:hover {
+        .text {
+            transform: rotate(5deg) translateX(52px);
+        }
+        .icon {
+            transform: scale(0) rotate(45deg) translateY(10px);
+        }
+        .icon-2 {
+            transform: scale(1) rotate(0deg);
+        }
+    }
+
+
+}
+
+
 /* 
     button-end
 */

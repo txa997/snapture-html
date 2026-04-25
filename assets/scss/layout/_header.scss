@@ -234,6 +234,220 @@
     header-1-end
 */
 
+/* 
+    header-2-start
+*/
+.st-header-2 {
+    &-area {
+        position: absolute;
+        top: 30px;
+        left: 0;
+        width: 100%;
+        z-index: 3;
+    }
+
+    &-container {
+        width: 100%;
+        max-width: 1290px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &-wrap {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        position: relative;
+        z-index: 1;
+        justify-content: space-between;
+        padding-left: 40px;
+        padding-right: 20px;
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border: 1px solid #fff;
+            background-color: transparent;
+            z-index: -1;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 100px;
+            border-style: dashed;
+            clip-path: polygon(0% 0%, 0% 100%, 45.5% 100%, 45.5% 0, 54.5% 0, 54.5% 100%, 100% 100%, 100% 0%);
+        }
+    }
+
+    &-logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 3px solid rgb(5 5 5 / 40%);
+
+        @media #{$lg,$md,$xs} {
+            position: unset;
+            transform: unset;
+            width: 60px;
+            height: 60px;
+        }
+
+        .logo-elm {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--st-clr-h-2);
+            box-shadow: inset 0px 0px 14px #FF7738;
+            border-radius: 50%;
+
+            @media #{$lg,$md,$xs} {
+                position: unset;
+                transform: unset;
+                width: 40px;
+                height: 40px;
+                padding: 5px;
+            }
+        }
+    }
+
+    &-action-link {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .st-pr-btn-2 {
+            @media #{$xs} {
+                display: none;
+            }
+            @media #{$sm} {
+       
+                display: inline-flex;
+            }
+
+            .icon {
+                width: 44px;
+                height: 44px;
+                background: var(--st-clr-h-2);
+        
+                .icon-box {
+                    width: 36px;
+                    height: 36px;
+                    box-shadow: inset 0px 0px 8px #FF7738;
+                    background: var(--st-clr-h-2);
+                }
+            }
+
+            .text {
+                padding: 10px 19px;
+                color: #fff;
+                background-color: var(--st-clr-h-2);
+            }
+
+            .icon-2 {
+                width: 44px;
+                height: 44px;
+                background: var(--st-clr-h-2);
+        
+                .icon-box {
+                    width: 36px;
+                    height: 36px;
+                    box-shadow: inset 0px 0px 8px #FF7738;
+                    background: var(--st-clr-h-2);
+                }
+            }
+
+            &:hover {
+                .text {
+                    transform: rotate(5deg) translateX(44px);
+                }
+            }
+        }
+
+        .st-offcanvas-btn-1 {
+            border-radius: 50%;
+        }
+    }
+}
+
+
+.st-main-navigation {
+    &:is(.has-header-2) {
+        .navbar-nav {
+            gap: 76px;
+
+            @media #{$xl} {
+                gap: 36px;
+            }
+
+            li {
+                a {
+                    font-family: var(--st-font-3);
+                    font-weight: 400;
+                    font-size: 18px;
+                    color: var(--st-clr-h-2);
+
+                    &::after {
+                        display: none;
+                    }
+                }
+
+                &:is(.dropdown) {
+                    > a {
+                        &::before {
+                            content: "\f103";
+                            color: #fff;
+                        }
+                    }
+                }
+
+
+                &:nth-child(4) {
+                    margin-right: 104px;
+
+                    @media #{$xl} {
+                        margin-right: 170px;
+                    }
+                }
+
+                &:hover {
+                    > a {
+                        color: #fff;
+                    }
+                }
+
+                .dropdown-menu {
+                    background: var(--st-clr-pr-2);
+                    border: 1px dashed rgb(255 255 255 / 50%);
+                    backdrop-filter: none;
+
+                    li {
+                        &:hover {
+                            > a {
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+/* 
+    header-2-end
+*/
+
 
 
 /* 
