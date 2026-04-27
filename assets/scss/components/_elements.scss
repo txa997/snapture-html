@@ -117,6 +117,27 @@
     }
 }
 
+
+
+.wa_magnifier_lens {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    cursor: none;
+
+    .wa_magnifier_lens_circle {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        pointer-events: none;
+        display: none;
+        background-repeat: no-repeat;
+        background-size: 800px 800px;
+        border: 2px solid rgb(255 255 255 / 50%);
+    }
+}
+
 /* 
     elements-end
 */

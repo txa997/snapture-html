@@ -62,7 +62,7 @@
 
 .st-pr-btn-2 {
     font-family: var(--st-font-4);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     font-size: 16px;
     font-weight: 600;
@@ -151,6 +151,55 @@
 
 }
 
+.st-sd-btn-2 {
+    font-family: var(--st-font-4);
+    color: #fff;
+    overflow: hidden;
+    border-radius: 100px;
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 2px;
+    transition: var(--st-cube-2);
+
+    &::after {
+        content: "";
+        width: 270px;
+        height: 270px;
+        background: linear-gradient(180deg, #E72B01 19.71%, rgba(0, 0, 0, 0) 50%, #FF7738 80%);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(416deg);
+        z-index: -1;
+        animation: st-sd-btn-2-kf 5s linear infinite;
+    }
+
+
+    .btn-border {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: var(--st-clr-h-2);
+        border-radius: 100px;
+        padding: 18px 26px;
+    }
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+@keyframes st-sd-btn-2-kf {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
 
 /* 
     button-end

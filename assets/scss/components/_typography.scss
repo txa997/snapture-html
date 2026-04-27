@@ -60,6 +60,61 @@
 }
 
 
+.st-subtitle-2 {
+    font-family: var(--st-font-4);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 6px 17px;
+    margin-bottom: 15px;
+
+    .line-1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 32px;
+        height: 1px;
+        background: var(--st-clr-pr-1);
+    }
+
+    .line-2 {
+        position: absolute;
+        top: -7px;
+        left: 7px;
+        width: 1px;
+        height: 32px;
+        background: var(--st-clr-pr-1);
+    }
+
+    .line-3 {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 32px;
+        height: 1px;
+        background: var(--st-clr-pr-1);
+    }
+
+    .line-4 {
+        position: absolute;
+        bottom: -7px;
+        right: 7px;
+        width: 1px;
+        height: 32px;
+        background: var(--st-clr-pr-1);
+    }
+
+    &:is(.has-black) {
+        color: var(--st-clr-h-2);
+    }
+}
+
+
 .st-sec-title-1 {
     font-family: var(--st-font-1);
     color: #fff;
@@ -100,7 +155,38 @@
 }
 
 
+.st-sec-title-2 {
+    font-family: var(--st-font-4);
+    color: #fff;
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 1.066;
+    margin-bottom: 0;
 
+    @media #{$xl} {
+        font-size: 55px;
+    }
+
+    @media #{$lg} {
+        font-size: 50px;
+    }
+
+    @media #{$md} {
+        font-size: 45px;
+    }
+
+    @media #{$xs} {
+        font-size: 35px;
+    }
+
+    @media #{$sm} {
+        font-size: 40px;
+    }
+
+    &:is(.has-black) {
+        color: var(--st-clr-h-2);
+    }
+}
 /* 
     typography-end
 */

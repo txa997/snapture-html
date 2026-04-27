@@ -1,0 +1,151 @@
+/* 
+    process-1-start
+*/
+.st-process-2 {
+    &-area {
+        background-color: rgb(5 5 5 / 5%);
+    }
+
+    &-sec-title {
+        margin-bottom: 102px;
+
+        .sec-disc {
+            margin-top: 11px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    }
+
+    &-wrap {
+        display: flex;
+        gap: 50px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        padding: 32px 40px;
+        position: relative;
+        z-index: 1;
+
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 2px;
+            background: conic-gradient(from var(--hero-border-angle, 0deg), #FF7738 0%, rgb(201 201 201 / 30%) 18.16%, rgb(201 201 201 / 30%) 77.89%, #E72B01 99.39%);
+            animation: heroBorderFlow 2.5s linear infinite;
+            pointer-events: none;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+
+
+        @keyframes heroBorderFlow  {
+            from {
+                --hero-border-angle: 0deg;
+            }
+            to {
+                --hero-border-angle: 360deg;
+            }
+        }
+
+        .left-side {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .right-side {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        &-line {
+            position: absolute;
+            top: 50%;
+            left: 40px;
+            transform: translateY(-50%);
+            width: calc(100% - 80px);
+            height: 1px;
+            background: #D9D9D9;
+        }
+    }
+    
+    &-lens {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36%;
+
+        @media #{$lg,$md,$xs} {
+            position: relative;
+            transform: unset;
+            left: unset;
+            top: unset;
+        }
+
+        &-man {
+            position: absolute;
+            overflow: hidden;
+            border-radius: 50%;
+            width: 84%;
+            mix-blend-mode: plus-lighter;
+
+            @media #{$lg,$md,$xs} {
+                
+            }
+        }
+    }
+
+    &-box {
+        max-width: 416px;
+
+        @media #{$xxl,$xl,$lg,$md,$xs} {
+            max-width: 316px;
+        }
+
+        .icon-x-number {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 19px;
+        }
+        
+
+        .number {
+            font-size: 16px;
+            color: var(--st-clr-pr-1);
+            opacity: 1;
+            font-weight: 600;
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+    }
+    
+    
+}
+
+
+@property --hero-border-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+/* 
+    process-1-end
+*/
